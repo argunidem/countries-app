@@ -2,7 +2,7 @@ import React from 'react';
 
 const Country = ({ country }) => {
   return (
-    <div className='flex flex-col justify-between shadow-xl select-text bg-white dark:bg-blue-1000 rounded-lg md:w-72'>
+    <div className='country-card flex flex-col justify-between cursor-pointer shadow-xl select-text font-semibold bg-white dark:bg-blue-1000 rounded-lg md:w-72 hover:scale-105 transition-all duration-200'>
       <img
         src={country.flags.png}
         alt='flag'

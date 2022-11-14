@@ -3,19 +3,9 @@ import CountriesContext from '../context/CountriesContext';
 import { BiSearch, BiChevronDown } from 'react-icons/bi';
 
 const Search = () => {
-  const { searchHandler } = useContext(CountriesContext);
+  const { searchHandler, filterRegion, toggleFilter } =
+    useContext(CountriesContext);
   const regions = ['Africa', 'America', 'Asia', 'Europe', 'Oceania'];
-
-  const toggleFilter = () => {
-    const menu = document.getElementById('menu');
-    if (menu.classList.contains('opacity-0')) {
-      menu.classList.remove('opacity-0', 'h-0');
-      menu.classList.add('opacity-100', 'h-36');
-    } else if (menu.classList.contains('opacity-100')) {
-      menu.classList.remove('opacity-100', 'h-36');
-      menu.classList.add('opacity-0', 'h-0');
-    }
-  };
 
   return (
     <section className='my-8 mx-6'>
@@ -30,7 +20,7 @@ const Search = () => {
             className='w-full focus:outline-0 leading-8 select-text dark:bg-blue-1000 dark:placeholder:text-white group-hover:bg-gray-200 dark:group-hover:bg-slate-700'
             type='search'
             placeholder='Search a country...'
-            onKeyDown={searchHandler}
+            onChange={searchHandler}
           />
         </div>
 
@@ -47,13 +37,14 @@ const Search = () => {
           </div>
           <div
             id='menu'
-            className='rounded-md font-semibold text-sm bg-white dark:text-slate-300 dark:bg-blue-1000 transition-all duration-500 opacity-0 h-0'
+            className='rounded-md font-semibold text-sm bg-white dark:text-slate-300 dark:bg-blue-1000 transition-all duration-300 opacity-0 h-0'
           >
             {regions.map((region, index) => {
               return (
                 <div
                   key={index}
                   className='rounded-md px-4 py-1 cursor-pointer select-none hover:bg-gray-200 dark:hover:bg-slate-700'
+                  onClick={filterRegion}
                 >
                   {region}
                 </div>

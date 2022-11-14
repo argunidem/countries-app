@@ -1,7 +1,8 @@
 import React from 'react';
+import Countries from '../components/Countries';
 
 const Home = () => {
-  return <div>Home</div>;
+  return <Countries />;
 };
 
 export default Home;

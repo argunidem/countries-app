@@ -4,7 +4,7 @@ const CountriesContext = createContext();
 
 export const CountriesProvider = ({ children }) => {
   const [countries, setCountries] = useState([]);
-
+  const [results, setResults] = useState([]);
   useEffect(() => {
     getCountries();
   }, []);
@@ -13,24 +13,40 @@ export const CountriesProvider = ({ children }) => {
     const response = await fetch('https://restcountries.com/v3.1/all');
     const data = await response.json();
     setCountries(data);
+    setResults(data);
   };
 
   const searchHandler = (e) => {
-    if (e.key === 'Enter') {
-      searchCountry(e.target.value);
-    }
+    const result = countries.filter((country) => {
+      return country.name.common
+        .toLowerCase()
+        .includes(e.target.value.toLowerCase());
+    });
+    setResults(result);
   };
 
-  const searchCountry = (input) => {
+  const filterRegion = (e) => {
+    toggleFilter();
     const result = countries.filter((country) => {
-      return country.name.common === input;
+      return country.region.includes(e.target.innerText);
     });
-    console.log(result);
+    setResults(result);
+  };
+
+  const toggleFilter = () => {
+    const menu = document.getElementById('menu');
+    if (menu.classList.contains('opacity-0')) {
+      menu.classList.remove('opacity-0', 'h-0');
+      menu.classList.add('opacity-100', 'h-36');
+    } else if (menu.classList.contains('opacity-100')) {
+      menu.classList.remove('opacity-100', 'h-36');
+      menu.classList.add('opacity-0', 'h-0');
+    }
   };
 
   return (
     <CountriesContext.Provider
-      value={{ countries, getCountries, searchHandler }}
+      value={{ results, searchHandler, filterRegion, toggleFilter }}
     >
       {children}
     </CountriesContext.Provider>
