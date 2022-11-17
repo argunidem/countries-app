@@ -38,15 +38,29 @@ export const CountriesProvider = ({ children }) => {
     if (menu.classList.contains('opacity-0')) {
       menu.classList.remove('opacity-0', 'h-0');
       menu.classList.add('opacity-100', 'h-36');
+      menu.querySelectorAll('div').forEach((menuItem) => {
+        menuItem.classList.remove('hidden');
+        menuItem.classList.add('block');
+      });
     } else if (menu.classList.contains('opacity-100')) {
       menu.classList.remove('opacity-100', 'h-36');
       menu.classList.add('opacity-0', 'h-0');
+      menu.querySelectorAll('div').forEach((menuItem) => {
+        menuItem.classList.remove('block');
+        menuItem.classList.add('hidden');
+      });
     }
   };
 
   return (
     <CountriesContext.Provider
-      value={{ results, searchHandler, filterRegion, toggleFilter }}
+      value={{
+        results,
+        countries,
+        searchHandler,
+        filterRegion,
+        toggleFilter,
+      }}
     >
       {children}
     </CountriesContext.Provider>

@@ -1,8 +1,16 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Country = ({ country }) => {
+  const navigate = useNavigate();
+
   return (
-    <div className='country-card flex flex-col justify-between cursor-pointer shadow-xl select-text font-semibold bg-white dark:bg-blue-1000 rounded-lg md:w-72 hover:scale-105 transition-all duration-200'>
+    <div
+      className='country-card flex flex-col justify-between cursor-pointer shadow-xl select-text font-semibold bg-white dark:bg-blue-1000 rounded-lg md:w-72 hover:scale-105 transition-all duration-200'
+      onClick={() =>
+        navigate(`/countries/${country.name.common.toLowerCase()}`)
+      }
+    >
       <img
         src={country.flags.png}
         alt='flag'

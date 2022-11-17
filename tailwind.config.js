@@ -6,6 +6,14 @@ module.exports = {
     fontFamily: {
       sans: ['Nunito Sans', 'sans-serif'],
     },
+    screens: {
+      xs: '350px',
+      sm: '520px',
+      md: '760px',
+      lg: '1024px',
+      xl: '1350px',
+      '2xl': '1536px',
+    },
     extend: {
       colors: {
         blue: {
